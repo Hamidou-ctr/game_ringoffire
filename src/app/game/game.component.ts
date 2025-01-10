@@ -27,12 +27,14 @@ export class GameComponent {
   takeCard() {
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop() || '';
-      console.log('Card taken', this.currentCard);
       this.pickCardAnimation = true;
+      console.log('Card taken', this.currentCard);
+      console.log('Stack', this.game);
 
       setTimeout(() => {
+        this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
-      }, 1500);
+      }, 1000);
     }
   }
 }
