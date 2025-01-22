@@ -52,10 +52,10 @@
 .player-position {
   position: absolute;
   right: 0;
+  z-index: 1;
 }
 
-
-.btn-add{
+.btn-add {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -67,14 +67,19 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 125ms ease-in-out;
-  &:hover{
+  &:hover {
     background-color: rgb(174, 98, 6, 0.8);
   }
 }
 
-app-game-info{
+app-game-info {
   position: absolute;
-bottom: 32px;
-left: 100px;
-right: 100px;
+  bottom: 32px;
+  left: 100px;
+  right: 100px;
+  @media screen and (max-width: 720px) {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }

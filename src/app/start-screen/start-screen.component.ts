@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Game } from '../../models/game';
 
 @Component({
   selector: 'app-start-screen',
@@ -11,12 +13,22 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent {
 
-  constructor(private router: Router) { }
+  game: Game;
 
-  ngOnInit(): void {}
+  constructor(private firestore: Firestore, private router: Router) {
+    this.game = new Game();
+  }
+
+  ngOnInit(): void { }
 
   newGame() {
-    this.router.navigateByUrl('/game');
+    // start game
+    let game = new Game();
+    const gamesCollection = collection(this.firestore, 'games');
+    addDoc(gamesCollection, this.game.toJSON()).then((gameInfo: any) => {
+      console.log('Game created with ID: ', gameInfo);
+      this.router.navigateByUrl('/game/' + gameInfo.id);
+    });
   }
 
 }

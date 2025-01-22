@@ -1,0 +1,18 @@
+mat-card {
+  background-color: rgba(94, 54, 54, 0.5);
+  margin: 16px;
+  @media screen and (max-width: 720px) {
+   
+
+  }
+}
+
+
+.responsive-card{
+    @media screen and (max-width: 720px) {
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
