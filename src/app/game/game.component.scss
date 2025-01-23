@@ -83,3 +83,17 @@ app-game-info {
     bottom: 0;
   }
 }
+
+.scroll-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  app-player-mobil{
+    margin: 0 8px;
+  }
+}

@@ -13,8 +13,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+html, body {
+  overflow: hidden;
+}
+
 @media screen and (max-width: 720px) {
-  .hede-mobile {
+  .hide-mobile {
     display: none;
   }
 }
