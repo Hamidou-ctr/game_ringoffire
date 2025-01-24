@@ -10,6 +10,7 @@ import { GameInfoComponent } from '../game-info/game-info.component';
 import { Firestore,  doc, collection, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerMobilComponent } from "../player-mobil/player-mobil.component";
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 
 
@@ -70,6 +71,15 @@ export class GameComponent {
         this.saveGame();
       }, 1000);
     }
+  }
+
+  editPlayer(playerId: number) {
+    console.log('Edit player', playerId);
+
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+     console.log('Received change', change);
+    });
   }
 
   openDialog(): void {

@@ -97,3 +97,12 @@ app-game-info {
     margin: 0 8px;
   }
 }
+
+
+app-player, app-player-mobil{
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+}
