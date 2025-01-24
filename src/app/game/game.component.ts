@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
-import { Firestore,  doc, collection, docData, updateDoc } from '@angular/fire/firestore';
+import { Firestore, doc, collection, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerMobilComponent } from "../player-mobil/player-mobil.component";
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
@@ -24,6 +24,7 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 export class GameComponent {
   game: Game = new Game();
   gameId: string = '';
+  gameOver: boolean = false;
 
   constructor(private route: ActivatedRoute, private firestore: Firestore = inject(Firestore), public dialog: MatDialog) {
   }
@@ -33,24 +34,24 @@ export class GameComponent {
     this.route.params.subscribe((params) => {
       console.log(params['id']);
 
-    this.gameId = params['id'];
+      this.gameId = params['id'];
 
 
-    const gameDoc = doc(this.firestore, `games/${this.gameId}`);
-    docData(gameDoc).subscribe((game: any) => {
-      //console.log('Game update', game);
+      const gameDoc = doc(this.firestore, `games/${this.gameId}`);
+      docData(gameDoc).subscribe((game: any) => {
+        //console.log('Game update', game);
 
-      this.game = new Game();
-      this.game.currentPlayer = game.currentPlayer;
-      this.game.players = game.players;
-      this.game.player_images = game.player_images;
-      this.game.playedCards = game.playedCards;
-      this.game.stack = game.stack;
-      this.game.pickCardAnimation = game.pickCardAnimation;
-      this.game.currentCard = game.currentCard;
+        this.game = new Game();
+        this.game.currentPlayer = game.currentPlayer;
+        this.game.players = game.players;
+        this.game.player_images = game.player_images;
+        this.game.playedCards = game.playedCards;
+        this.game.stack = game.stack;
+        this.game.pickCardAnimation = game.pickCardAnimation;
+        this.game.currentCard = game.currentCard;
 
-      console.log('Game', this.game.player_images);
-    });
+        console.log('Game', this.game.player_images);
+      });
     });
 
   }
@@ -60,7 +61,9 @@ export class GameComponent {
   }
 
   takeCard() {
-    if (!this.game.pickCardAnimation) {
+    if (this.game.stack.length == 0) {
+      this.gameOver = true;
+    } else if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop() || '';
       this.game.pickCardAnimation = true;
 
@@ -81,9 +84,16 @@ export class GameComponent {
 
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
-     console.log('Received change', change);
-     this.game.player_images[playerId] = change;
-      this.saveGame();
+      if (change) {
+        if (change === 'DELETE') {
+          this.game.players.splice(playerId, 1);
+          this.game.player_images.splice(playerId, 1);
+        } else {
+          console.log('Received change', change);
+          this.game.player_images[playerId] = change;
+        }
+        this.saveGame();
+      }
     });
   }
 

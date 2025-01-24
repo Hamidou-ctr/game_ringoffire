@@ -106,3 +106,29 @@ app-player, app-player-mobil{
     filter: brightness(1.15);
   }
 }
+
+
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+
+  >img{
+    width: 50%;
+    height: 50vh;
+    border-radius: 16px;
+  }
+}
+
+.preloadImage {
+ display: none;
+}
