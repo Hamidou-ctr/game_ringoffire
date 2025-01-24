@@ -32,14 +32,9 @@ export class GameComponent {
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((params) => {
-      console.log(params['id']);
-
       this.gameId = params['id'];
-
-
       const gameDoc = doc(this.firestore, `games/${this.gameId}`);
       docData(gameDoc).subscribe((game: any) => {
-        //console.log('Game update', game);
 
         this.game = new Game();
         this.game.currentPlayer = game.currentPlayer;
@@ -49,8 +44,6 @@ export class GameComponent {
         this.game.stack = game.stack;
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
-
-        console.log('Game', this.game.player_images);
       });
     });
 
@@ -80,8 +73,6 @@ export class GameComponent {
   }
 
   editPlayer(playerId: number) {
-    console.log('Edit player', playerId);
-
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
       if (change) {
@@ -89,7 +80,6 @@ export class GameComponent {
           this.game.players.splice(playerId, 1);
           this.game.player_images.splice(playerId, 1);
         } else {
-          console.log('Received change', change);
           this.game.player_images[playerId] = change;
         }
         this.saveGame();

@@ -8,6 +8,9 @@
 
     >span{
         font-size: 14px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     >img{
         margin-top: 16px;
