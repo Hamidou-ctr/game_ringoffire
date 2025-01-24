@@ -9,7 +9,7 @@ export class Game{
 
     constructor(){
         for(let i = 1; i < 14; i++){
-            this.stack.push('spade_' + i);
+            //this.stack.push('spade_' + i);
             this.stack.push('hearts_' + i);
             this.stack.push('clubs_' + i);
             this.stack.push('diamonds_' + i);
@@ -45,6 +45,5 @@ function shuffle (array: string[]) {
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
-  
     return array;
 }
