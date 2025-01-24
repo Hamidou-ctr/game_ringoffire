@@ -38,15 +38,18 @@ export class GameComponent {
 
     const gameDoc = doc(this.firestore, `games/${this.gameId}`);
     docData(gameDoc).subscribe((game: any) => {
-      console.log('Game update', game);
+      //console.log('Game update', game);
 
       this.game = new Game();
       this.game.currentPlayer = game.currentPlayer;
       this.game.players = game.players;
+      this.game.player_images = game.player_images;
       this.game.playedCards = game.playedCards;
       this.game.stack = game.stack;
       this.game.pickCardAnimation = game.pickCardAnimation;
       this.game.currentCard = game.currentCard;
+
+      console.log('Game', this.game.player_images);
     });
     });
 
@@ -79,6 +82,8 @@ export class GameComponent {
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
      console.log('Received change', change);
+     this.game.player_images[playerId] = change;
+      this.saveGame();
     });
   }
 
@@ -88,6 +93,7 @@ export class GameComponent {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.game.player_images.push('1.webp');
         this.saveGame();
       }
     });
