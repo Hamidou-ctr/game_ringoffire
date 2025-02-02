@@ -13,7 +13,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body {
+html,
+body {
   overflow: hidden;
 }
 
@@ -23,13 +24,8 @@ html, body {
   }
 }
 
-
 @media screen and (min-width: 721px) {
-
   .hide-desktop {
-
     display: none;
-
   }
-
 }

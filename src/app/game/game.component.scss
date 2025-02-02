@@ -98,6 +98,14 @@ app-game-info {
   }
 }
 
+/* @media screen and (max-width: 720px) {
+  app-player-mobil {
+    display: flex;
+  }
+  app-player {
+    display: none;
+  }
+} */
 
 app-player, app-player-mobil{
   cursor: pointer;

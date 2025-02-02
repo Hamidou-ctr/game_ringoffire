@@ -21,6 +21,12 @@
     }
 
     background-color: rgb(50, 50, 50, 0.5);
+
+    @media (max-width: 720px) {
+        .hide-desktop {
+          display: none;
+        }
+      }
 }
 
 .player-active{
